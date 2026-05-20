@@ -1,5 +1,4 @@
 import pytest
-from playwright.sync_api import expect
 
 from pages.courses_list_page import CoursesListPage
 from pages.create_course_page import CreateCoursePage
@@ -10,16 +9,20 @@ from pages.create_course_page import CreateCoursePage
 def test_empty_courses_list(courses_list_page: CoursesListPage):
     """
     Тест проверяет отображение пустого списка курсов.
-    Использует фикстуру courses_list_page для авторизованной сессии.
+    Включает проверку компонентов Navbar и Sidebar.
     """
+    # Проверка компонентов навигации
+    courses_list_page.navbar.check_visible("username")
+    courses_list_page.sidebar.check_visible()
+
     # Проверка заголовка "Courses"
     courses_list_page.check_visible_courses_title()
 
-    # Проверка пустого блока
-    courses_list_page.check_visible_empty_view()
-
     # Проверка кнопки создания курса
     courses_list_page.check_visible_create_course_button()
+
+    # Проверка пустого блока с сообщением
+    courses_list_page.check_visible_empty_view()
 
 
 @pytest.mark.courses

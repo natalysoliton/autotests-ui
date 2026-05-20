@@ -1,5 +1,8 @@
 # Импортируем компонент
+from playwright.async_api import Page
+
 from components.courses.courses_list_toolbar_view_component import CoursesListToolbarViewComponent
+from pages.base_page import BasePage
 
 
 class CoursesListPage(BasePage):

@@ -1,7 +1,4 @@
-import re
-
 from playwright.sync_api import Page
-
 from components.base_component import BaseComponent
 from components.navigation.sidebar_list_item_component import SidebarListItemComponent
 
@@ -10,20 +7,19 @@ class SidebarComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.logout_list_item = SidebarListItemComponent(page, 'logout')
-        self.courses_list_item = SidebarListItemComponent(page, 'courses')
-        self.dashboard_list_item = SidebarListItemComponent(page, 'dashboard')
+        # Создаем элементы бокового меню
+        self.dashboard_item = SidebarListItemComponent(page)
+        self.courses_item = SidebarListItemComponent(page)
 
     def check_visible(self):
-        self.logout_list_item.check_visible('Logout')
-        self.courses_list_item.check_visible('Courses')
-        self.dashboard_list_item.check_visible('Dashboard')
-
-    def click_logout(self):
-        self.logout_list_item.navigate(re.compile(r".*/#/auth/login"))
-
-    def click_courses(self):
-        self.courses_list_item.navigate(re.compile(r".*/#/courses"))
+        """Проверяет отображение бокового меню"""
+        self.dashboard_item.check_visible(name='dashboard', expected_text='Dashboard')
+        self.courses_item.check_visible(name='courses', expected_text='Courses')
 
     def click_dashboard(self):
-        self.dashboard_list_item.navigate(re.compile(r".*/#/dashboard"))
+        """Нажимает на пункт меню Dashboard"""
+        self.dashboard_item.click(name='dashboard')
+
+    def click_courses(self):
+        """Нажимает на пункт меню Courses"""
+        self.courses_item.click(name='courses')

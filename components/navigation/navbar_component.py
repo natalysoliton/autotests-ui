@@ -1,18 +1,23 @@
-from playwright.sync_api import Page, expect
-
+from playwright.sync_api import Page
 from components.base_component import BaseComponent
+from elements.text import Text
+from elements.button import Button
 
 
 class NavbarComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.app_title = page.get_by_test_id('navigation-navbar-app-title-text')
-        self.welcome_title = page.get_by_test_id('navigation-navbar-welcome-title-text')
+        self.username_text = Text(page, 'navbar-user-info-username-text', 'Username')
+        self.logout_button = Button(page, 'navbar-logout-button', 'Logout')
 
     def check_visible(self, username: str):
-        expect(self.app_title).to_be_visible()
-        expect(self.app_title).to_have_text('UI Course')
+        """Проверяет отображение navbar с именем пользователя"""
+        self.username_text.check_visible()
+        self.username_text.check_have_text(username)
 
-        expect(self.welcome_title).to_be_visible()
-        expect(self.welcome_title).to_have_text(f'Welcome, {username}!')
+        self.logout_button.check_visible()
+
+    def click_logout_button(self):
+        """Нажимает кнопку выхода"""
+        self.logout_button.click()

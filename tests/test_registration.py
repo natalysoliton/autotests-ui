@@ -1,5 +1,4 @@
 import pytest
-from playwright.sync_api import Page
 from pages.registration_page import RegistrationPage
 from pages.dashboard_page import DashboardPage
 
@@ -15,4 +14,5 @@ def test_successful_registration(dashboard_page: DashboardPage, registration_pag
     )
     registration_page.registration_form.click_registration_button()
 
+    # Проверка, что регистрация успешна (редирект на дашборд)
     dashboard_page.dashboard_toolbar_view.check_visible()

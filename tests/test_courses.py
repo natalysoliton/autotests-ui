@@ -7,6 +7,7 @@ from pages.create_course_page import CreateCoursePage
 @pytest.mark.courses
 @pytest.mark.regression
 def test_empty_courses_list(courses_list_page: CoursesListPage):
+    """Тест проверяет отображение пустого списка курсов"""
     courses_list_page.toolbar_view.check_visible()
     courses_list_page.check_visible_empty_view()
 
@@ -14,10 +15,12 @@ def test_empty_courses_list(courses_list_page: CoursesListPage):
 @pytest.mark.courses
 @pytest.mark.regression
 def test_create_course(courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
-    # Проверка отображения тулбара
+    """Тест создания курса с упражнением"""
+
+    # Проверка отображения тулбара (кнопка создания недоступна)
     create_course_page.toolbar_view.check_visible(is_create_course_disabled=True)
 
-    # Проверка виджета загрузки изображения
+    # Проверка виджета загрузки изображения (без изображения)
     create_course_page.image_upload_widget.check_visible(is_image_uploaded=False)
 
     # Загрузка изображения
@@ -33,7 +36,7 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         min_score="10"
     )
 
-    # Проверка формы
+    # Проверка корректности заполнения формы
     create_course_page.create_course_form.check_visible(
         title="Playwright",
         estimated_time="2 weeks",
@@ -42,7 +45,7 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         min_score="10"
     )
 
-    # Проверка блока упражнений
+    # Проверка блока упражнений (пустое состояние)
     create_course_page.exercises_toolbar_view.check_visible()
     create_course_page.check_visible_exercises_empty_view()
 
@@ -58,6 +61,10 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         title="Exercise 1",
         description="Exercise description"
     )
+
+    # После заполнения всех полей и создания упражнения,
+    # кнопка создания курса должна стать активной
+    create_course_page.toolbar_view.check_visible(is_create_course_disabled=False)
 
     # Создание курса
     create_course_page.toolbar_view.click_create_course_button()

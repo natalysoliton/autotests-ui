@@ -1,0 +1,19 @@
+# Кэш pytest
+.pytest_cache/
+
+# IDE PyCharm
+.idea/
+
+# Кэш Python
+__pycache__/
+
+# Allure результаты
+allure-results/
+allure-report/
+
+# Виртуальное окружение
+venv/
+.venv/
+
+# templates
+templates/

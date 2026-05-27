@@ -4,7 +4,7 @@ from allure_commons.types import Severity
 
 from config import settings
 from pages.courses.courses_list_page import CoursesListPage
-from pages.courses.create_courses_page import CreateCoursePage
+from pages.courses.create_course_page import CreateCoursePage
 from tools.allure.tags import AllureTag
 from tools.allure.epics import AllureEpic
 from tools.allure.features import AllureFeature

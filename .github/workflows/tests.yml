@@ -33,6 +33,31 @@ jobs:
         run: |
           pytest -m "authorization" --alluredir=allure-results --numprocesses 2
 
+      # Сохраняем результаты тестов как артефакт для следующей джобы
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()  # Сохраняем даже если тесты упали
+        with:
+          name: allure-results
+          path: allure-results
+          retention-days: 30
+
+  publish-report:
+    runs-on: ubuntu-latest
+    needs: run-tests  # Эта джоба запустится ТОЛЬКО после завершения run-tests
+    if: always()  # Запускаем даже если run-tests завершилась с ошибкой
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Загружаем сохранённые результаты тестов
+      - name: Download Allure results
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
       - name: Get Allure history
         uses: actions/checkout@v4
         if: always()

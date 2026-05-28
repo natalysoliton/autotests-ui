@@ -1,37 +1,19 @@
-.tracing/
-.videos/
-
-# Кэш pytest
-.pytest_cache/
-
-# IDE PyCharm
-.idea/
-
-notused/
-.notused/
-
-# Кэш Python
-__pycache__/
-
-# Allure результаты
-allure-results/
-allure-report/
-
-# Виртуальное окружение
-venv/
-.venv/
-
 # templates
-templates/
+templates
 
-playwright_authorization.py
-playwright_courses.py
-playwright_errors.py
-playwright_events.py
-playwright_hover.py
-playwright_js.py
-playwright_keyboard.py
-playwright_registration.py
-playwright_registration_button.py
-pydantic_product.py
-pydantic_user.py
+# pycharm
+.idea
+
+# python
+.venv
+__pycache__
+
+# allure
+allure-results
+allure-report
+
+# testing artifacts
+*.html
+*.json
+videos
+tracing

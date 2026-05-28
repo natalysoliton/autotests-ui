@@ -10,7 +10,6 @@ from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from tools.routes import AppRoute
 
-
 @pytest.mark.dashboard
 @pytest.mark.regression
 @allure.tag(AllureTag.REGRESSION, AllureTag.DASHBOARD)
